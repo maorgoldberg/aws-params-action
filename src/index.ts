@@ -3,7 +3,7 @@ import { ConfigFactory } from './ConfigFactory'
 import { getInput, setOutput } from '@actions/core'
 import { ParameterFetcher } from './ParameterFetcher'
 import { OutputSetter } from './OutputSetter'
-
+process.env['GITHUB_OUTPUT'] = 'temp'
 const ssm = new SSM({ apiVersion: '2014-11-06' })
 
 const configFactory = new ConfigFactory(getInput)
