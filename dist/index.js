@@ -6,6 +6,7 @@ var core_1 = require("@actions/core");
 var ParameterFetcher_1 = require("./ParameterFetcher");
 var OutputSetter_1 = require("./OutputSetter");
 process.env['GITHUB_OUTPUT'] = 'temp';
+console.log(process.env['GITHUB_OUTPUT']);
 var ssm = new aws_sdk_1.SSM({ apiVersion: '2014-11-06' });
 var configFactory = new ConfigFactory_1.ConfigFactory(core_1.getInput);
 var parameterFetcher = new ParameterFetcher_1.ParameterFetcher(ssm);
