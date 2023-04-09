@@ -1,15 +1,15 @@
 import { Parameter } from './ParameterFetcher'
 
 type OutputFn = (key: string, value: string) => void
-type MaskerFn = (key: string) => void
+// type MaskerFn = (key: string) => void
 
 class OutputSetter {
-  constructor (private outputFn: OutputFn, private maskerFn: MaskerFn) {
+  constructor (private outputFn: OutputFn) {
   }
 
   public set(params: Parameter[]): void {
     params.forEach(param => {
-      this.maskerFn(param.value)
+      // this.maskerFn(param.value)
       this.outputFn(param.name, param.value)
     })
   }
