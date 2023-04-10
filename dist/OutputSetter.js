@@ -10,8 +10,8 @@ var OutputSetter = /** @class */ (function () {
         var _this = this;
         params.forEach(function (param) {
             // this.maskerFn(param.value)
-            process.env['GITHUB_OUTPUT'] = param.name + '=' + param.value;
-            _this.outputFn(param.name, param.value);
+            process.env['GITHUB_OUTPUT'] = param.name.replace('/', '') + '=' + param.value;
+            _this.outputFn(param.name.replace('/', ''), param.value);
         });
     };
     return OutputSetter;

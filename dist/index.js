@@ -10,10 +10,10 @@ var ssm = new aws_sdk_1.SSM({ apiVersion: '2014-11-06' });
 function myOutputFn(name, value) {
     var filePath = process.env.GITHUB_OUTPUT || '';
     if (filePath) {
-        console.log();
+        console.log("env name=" + name.replace('/', '') + "::" + value);
         return;
     }
-    console.log("::set-output name=" + name + "::" + value);
+    console.log("::set-output name=" + name.replace('/', '') + "::" + value);
 }
 var configFactory = new ConfigFactory_1.ConfigFactory(core_1.getInput);
 var parameterFetcher = new ParameterFetcher_1.ParameterFetcher(ssm);

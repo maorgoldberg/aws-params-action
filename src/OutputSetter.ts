@@ -10,8 +10,8 @@ class OutputSetter {
   public set(params: Parameter[]): void {
     params.forEach(param => {
       // this.maskerFn(param.value)
-      process.env['GITHUB_OUTPUT'] = param.name + '=' + param.value
-      this.outputFn(param.name, param.value)
+      process.env['GITHUB_OUTPUT'] = param.name.replace('/', '') + '=' + param.value
+      this.outputFn(param.name.replace('/', ''), param.value)
     })
   }
 }

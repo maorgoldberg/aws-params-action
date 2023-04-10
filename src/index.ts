@@ -8,10 +8,10 @@ const ssm = new SSM({ apiVersion: '2014-11-06' })
 function myOutputFn(name: string, value: string): void {
     const filePath = process.env.GITHUB_OUTPUT || '';
     if (filePath) {
-        console.log()
+        console.log(`env name=${name.replace('/', '')}::${value}`)
         return
     }
-    console.log(`::set-output name=${name}::${value}`)
+    console.log(`::set-output name=${name.replace('/', '')}::${value}`)
 }
 const configFactory = new ConfigFactory(getInput)
 const parameterFetcher = new ParameterFetcher(ssm)

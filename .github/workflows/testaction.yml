@@ -29,4 +29,4 @@ jobs:
           withDecryption: true
         
       - name: print-output-build-number
-        run: echo "build number is ${{ steps.fetchSecrets.outputs['/Actions/BuildNum'] }}"
+        run: echo "build number is ${{ steps.fetchSecrets.outputs.ActionsBuildNum }}"
