@@ -5,10 +5,17 @@ import { ParameterFetcher } from './ParameterFetcher'
 import { OutputSetter } from './OutputSetter'
 console.log(process.env['GITHUB_OUTPUT'])
 const ssm = new SSM({ apiVersion: '2014-11-06' })
-
+function myOutputFn(name: string, value: string): void {
+    const filePath = process.env['GITHUB_OUTPUT'] || '';
+    if (filePath) {
+        console.log()
+        return
+    }
+    console.log(`::set-output name=${name}::${value}`)
+}
 const configFactory = new ConfigFactory(getInput)
 const parameterFetcher = new ParameterFetcher(ssm)
-const outputSetter = new OutputSetter(setOutput)
+const outputSetter = new OutputSetter(myOutputFn)
 
 Promise.resolve()
   .then(() => configFactory.get())
