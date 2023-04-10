@@ -1,0 +1,29 @@
+name: Cache Modules Actions
+description: use cache modules in each deploy/build
+runs:
+  using: 'composite'
+  steps:
+    - name: Build packages Collection Hash
+      id: build-packages-collection-not-main
+      run: |
+        yarn build:packages-hash
+      shell: bash
+
+    - name: Cache Indication Note
+      run: |
+        echo -e "\033[32m ### Note** to identify if node_modules came from cache, this step will log list of the files that came from cache \033[0m"
+      shell: bash
+
+    - name: Cache modules
+      id: cache-modules
+      uses: actions/cache@v3
+      env:
+        GITHUB_ACTIONS_CACHE_NO_LOGS: 'true'
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-(node version ${{ env.NODE_VERSION }})-node-modules-${{ hashFiles('**/packages-hash.md5') }}
+
+    - name: Debug
+      id: ls-post-cache-modules
+      shell: bash
+      run: ls

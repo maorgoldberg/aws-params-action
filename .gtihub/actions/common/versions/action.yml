@@ -1,0 +1,17 @@
+name: Node Module Version
+description: setup the correct version for node-modules
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node 16
+      id: nodejs-setup
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.15.0
+
+    - name: Setup version in Env for caching
+      id: setup-node-version-env
+      run: |
+        echo "NODE_VERSION=16.15.0" >> $GITHUB_ENV
+        echo ::set-output name=node-version::$NODE_VERSION
+      shell: bash

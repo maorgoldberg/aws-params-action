@@ -6,7 +6,7 @@ import { OutputSetter } from './OutputSetter'
 console.log(process.env['GITHUB_OUTPUT'])
 const ssm = new SSM({ apiVersion: '2014-11-06' })
 function myOutputFn(name: string, value: string): void {
-    const filePath = process.env['GITHUB_OUTPUT'] || '';
+    const filePath = process.env.GITHUB_OUTPUT || '';
     if (filePath) {
         console.log()
         return
