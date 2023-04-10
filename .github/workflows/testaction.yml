@@ -15,12 +15,19 @@ jobs:
       - name: Node Version
         uses: ./.github/actions/common/versions
 
-      - name: build number
-        id: build-number
-        uses: ./.github/actions/build-number
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
-      
+          aws-access-key-id: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+
+      - name: Fetch secrets from AWS SSM Parameter Store
+        id: fetchSecrets
+        uses: maorgoldberg/aws-params-action@main
+        with:
+          names: /Actions/BuildNum
+          withDecryption: true
+        
       - name: print-output-build-number
-        run: echo "build number is ${{ steps.build-number.outputs.build-number }}"
+        run: echo "build number is ${{ steps.fetchSecrets.outputs['/Actions/BuildNum'] }}"
