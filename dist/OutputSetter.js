@@ -11,6 +11,7 @@ var OutputSetter = /** @class */ (function () {
         params.forEach(function (param) {
             // this.maskerFn(param.value)
             // process.env['GITHUB_OUTPUT'] = param.name.replace('/', '') + '=' + param.value
+            console.log("env name=" + param.name.replace('/', '') + "::" + param.value);
             _this.outputFn(param.name.replace('/', ''), param.value);
         });
     };
