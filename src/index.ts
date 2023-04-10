@@ -3,7 +3,6 @@ import { ConfigFactory } from './ConfigFactory'
 import { getInput, setOutput } from '@actions/core'
 import { ParameterFetcher } from './ParameterFetcher'
 import { OutputSetter } from './OutputSetter'
-console.log(process.env['GITHUB_OUTPUT'])
 const ssm = new SSM({ apiVersion: '2014-11-06' })
 function myOutputFn(name: string, value: string): void {
     const filePath = process.env.GITHUB_OUTPUT || '';
@@ -15,7 +14,7 @@ function myOutputFn(name: string, value: string): void {
 }
 const configFactory = new ConfigFactory(getInput)
 const parameterFetcher = new ParameterFetcher(ssm)
-const outputSetter = new OutputSetter(myOutputFn)
+const outputSetter = new OutputSetter(setOutput)
 
 Promise.resolve()
   .then(() => configFactory.get())
