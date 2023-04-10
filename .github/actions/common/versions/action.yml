@@ -13,5 +13,5 @@ runs:
       id: setup-node-version-env
       run: |
         echo "NODE_VERSION=16.15.0" >> $GITHUB_ENV
-        echo ::set-output name=node-version::$NODE_VERSION
+        echo "{name}={$NODE_VERSION}" >> $GITHUB_OUTPUT
       shell: bash
