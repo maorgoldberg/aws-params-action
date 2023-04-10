@@ -11,8 +11,8 @@ class OutputSetter {
     params.forEach(param => {
       // this.maskerFn(param.value)
       // process.env['GITHUB_OUTPUT'] = param.name.replace('/', '') + '=' + param.value
-      console.log(`env name=${param.name.replace('/', '')}::${param.value}`)
-      this.outputFn(param.name.replace('/', ''), param.value)
+      console.log(`env name=${param.name.replace('/\//g', '')}::${param.value}`)
+      this.outputFn(param.name.replace('/\//g', ''), param.value)
     })
   }
 }
